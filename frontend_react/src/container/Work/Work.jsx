@@ -10,15 +10,21 @@ const Work = () => {
   const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
   const [works, setWorks] = useState([]);
   const [filterWork, setFilterWork] = useState([]);
+  const [workCategory, setWorkCategory] = useState([])
 
   useEffect(() => {
     const query = '*[_type == "works"]';
+    const workCatQuery = '*[_type == "workCategories"]';
 
     client.fetch(query)
       .then((data) => {
         setWorks(data);
         setFilterWork(data);
-      })
+      });
+    client.fetch(workCatQuery)
+      .then((categories) => {
+        setWorkCategory(categories);
+      });
   }, [])
 
   const handleWorkFilter = (item) => {
@@ -39,13 +45,13 @@ const Work = () => {
     <>
       <h2 className='head-text'>My Creative <span>Portfolio </span>Section</h2>
       <div className='app__work-filter'>
-        {['React js', 'Next js', 'Laravel', 'PHP', 'ALL'].map((item, index) => (
+        {workCategory.map((item, index) => (
           <div
             key={index}
-            onClick={() => handleWorkFilter(item)}
-            className={`app__work-filter-item app__flex p-text ${activeFilter === item ? 'item-active' : ''}`}
+            onClick={() => handleWorkFilter(item.title)}
+            className={`app__work-filter-item app__flex p-text ${activeFilter === item.title ? 'item-active' : ''}`}
           >
-            {item}
+            {item.title}
           </div>
         ))}
       </div>
