@@ -10,7 +10,7 @@ const Skills = () => {
   const [skills, setSkills] = useState([]);
 
   useEffect(() => {
-    const query = '*[_type == "experiences"]';
+    const query = '*[_type == "experiences"] | order(year asc)';
     const skillsQuery = '*[_type == "skills"]';
 
     client.fetch(query)
@@ -43,34 +43,35 @@ const Skills = () => {
           ))}
         </motion.div>
         <motion.div className='app__skills-exp'>
-          {experience?.map((experience) => (
+          {experience?.map((exp) => (
             <motion.div
               className='app__skills-exp-item'
-              key={experience.year}
+              key={exp.year}
             >
               <div className='app__skills-exp-year'>
-                <p className='bold-text'>{experience.year}</p>
+                <p className='bold-text'>{exp.year}</p>
               </div>
               <motion.div className='app_skills-exp-works'>
-                {experience?.works?.map((work) => (
+                {exp?.works?.map((work) => (
                   <>
                     <motion.div
                       whileInView={{ opacity: [0, 1] }}
                       transition={{ duration: 0.5 }}
                       className='app__skills-exp-work'
                       data-tip
-                      data-for={work.name}
+                      data-for={work.company}
                       key={work.name}
                     >
                       <h4 className='bold-text'>{work.name}</h4>
                       <p className='p-text'>{work.company}</p>
+                      <p className='p-text'>{work.desc}</p>
                     </motion.div>
                     <ReactTooltip
-                      id={work.name}
+                      id={work.company}
                       effect='solid'
                       arrowColor='#fff'
                       className='skills-tooltip'
-                    >
+                    >                      
                       {work.desc}
                     </ReactTooltip>
                   </>
