@@ -51,7 +51,7 @@ const Skills = () => {
               <div className='app__skills-exp-year'>
                 <p className='bold-text'>{exp.year}</p>
               </div>
-              <motion.div className='app_skills-exp-works'>
+              <motion.div className='app__skills-exp-works'>
                 {exp?.works?.map((work) => (
                   <>
                     <motion.div
@@ -64,7 +64,7 @@ const Skills = () => {
                     >
                       <h4 className='bold-text'>{work.name}</h4>
                       <p className='p-text'>{work.company}</p>
-                      <p className='p-text'>{work.desc}</p>
+                      <p className='p-text'>{work.technologies}</p>
                     </motion.div>
                     <ReactTooltip
                       id={work.company}

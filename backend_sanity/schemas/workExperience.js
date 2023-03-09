@@ -16,6 +16,11 @@ export default {
                 name:'desc',
                 title:'Desc',
                 type:'string'
+            },
+            {
+                name:'technologies',
+                title:'Technologies used',
+                type:'string'
             }
     ]
 }
