@@ -1,10 +1,40 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+
+import { images } from '../../constants';
+import { AppWrap, MotionWrap } from '../../wrapper';
+import { client } from '../../client';
 import './Footer.scss'
 
 const Footer = () => {
+  const [personalInfo, setPersonalInfo] = useState([]);
+
+  useEffect(() => {
+    const query = '*[_type == "personalInfo"]';
+    client.fetch(query)
+      .then((data) => {
+        setPersonalInfo(data);
+      });
+  }, []);
   return (
-    <div>Footer</div>
+    <>
+      <h2 className='head-text'>Take a coffee & chat with me.</h2>
+      <div className='app__footer-cards'>
+        {personalInfo.map((item) => (
+          <>
+            <div className='app__footer-card'>
+              <img src={images.email} alt='email' />
+              <a href={`mailto:${item.email}`} className='p-text'>{item.email}</a>
+            </div>
+            <div className='app__footer-card'>
+              <img src={images.mobile} alt='mobile' />
+              <a href={`tel: ${item.countryCode}${item.mobile}`} className='p-text'>{item.countryCode}{item.mobile}</a>
+            </div>
+          </>
+        ))}
+
+      </div>
+    </>
   )
 }
 
-export default Footer
+export default AppWrap(MotionWrap(Footer, 'app__footer'), 'contact', 'app__whitebg');
