@@ -49,6 +49,16 @@ export default {
             type: 'string'
         },
         {
+            name: 'greetings',
+            title: 'Greetings Message',
+            type: 'string'
+        },       
+        {
+            name: 'waveEmoji',
+            title: 'Wave Emoji',
+            type: 'string'
+        },
+        {
             name: 'imgUrl',
             title: 'Profile Image',
             type: 'image',

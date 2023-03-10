@@ -12,26 +12,21 @@ const Footer = () => {
     const query = '*[_type == "personalInfo"]';
     client.fetch(query)
       .then((data) => {
-        setPersonalInfo(data);
+        setPersonalInfo(data[0]);
       });
   }, []);
   return (
     <>
       <h2 className='head-text'>Take a coffee & chat with me.</h2>
       <div className='app__footer-cards'>
-        {personalInfo.map((item) => (
-          <>
-            <div className='app__footer-card'>
-              <img src={images.email} alt='email' />
-              <a href={`mailto:${item.email}`} className='p-text'>{item.email}</a>
-            </div>
-            <div className='app__footer-card'>
-              <img src={images.mobile} alt='mobile' />
-              <a href={`tel: ${item.countryCode}${item.mobile}`} className='p-text'>({item.countryCode}) {item.mobile}</a>
-            </div>            
-          </>
-        ))}
-
+        <div className='app__footer-card'>
+          <img src={images.email} alt='email' />
+          <a href={`mailto:${personalInfo.email}`} className='p-text'>{personalInfo.email}</a>
+        </div>
+        <div className='app__footer-card'>
+          <img src={images.mobile} alt='mobile' />
+          <a href={`tel: ${personalInfo.countryCode}${personalInfo.mobile}`} className='p-text'>({personalInfo.countryCode}) {personalInfo.mobile}</a>
+        </div>
       </div>
     </>
   )

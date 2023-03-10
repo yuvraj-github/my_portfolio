@@ -8,5 +8,6 @@ import workExperience from "./workExperience"
 import works from "./works"
 import workCategories from "./workCategories"
 import personalInfo from "./personalInfo"
+import circleImages from "./circleImages"
 
-export const schemaTypes = [abouts, brands, contact, experiences, skills, testimonials, workExperience, works, workCategories, personalInfo]
+export const schemaTypes = [abouts, brands, contact, experiences, skills, testimonials, workExperience, works, workCategories, personalInfo, circleImages]
